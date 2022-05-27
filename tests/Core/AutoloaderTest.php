@@ -75,13 +75,17 @@ final class AutoloaderTest extends PHPUnit\Framework\TestCase
     public function testDeepNamespaceAliases(): void
     {
         $this->loader->mapNamespace('Efl\\DB', '/home/dev/efl/src/Services/Database/')
-                     ->mapNamespace('Efl\\Srv\\', '/home/dev/efl/src/Services');
+                     ->mapNamespace('Efl\\Srv\\', '/home/dev/efl/src/Services')
+                     ->mapNamespace('Efl', '/home/dev/efl/src');
                      
         $classpath = $this->loader->getClassPath('Efl\\DB\MySql');
         $this->assertSame($classpath, '/home/dev/efl/src/Services/Database/MySql.php');
         
         $classpath = $this->loader->getClassPath('Efl\\Srv\\Cache\\Redis');
         $this->assertSame($classpath, '/home/dev/efl/src/Services/Cache/Redis.php');
+        
+        $classpath = $this->loader->getClassPath('Efl\\Application');
+        $this->assertSame($classpath, '/home/dev/efl/src/Application.php');
     }
     
     public function testFailureToFindClasspath(): void

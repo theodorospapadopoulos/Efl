@@ -5,9 +5,14 @@ declare(strict_types=1);
 namespace Psr\Log;
 
 /**
- * Represents all possible log levels
+ * Represents all possible log levels.
+ * The PSR-3 specification defines this structure as a class with constants.
+ * An adaptation is done using a PHP enumeration which is more strict.
+ * With this the InvalidArgumentException defined in the specification
+ * becomes obsolete as there is no way to pass to the logging function
+ * a level that does not exist.
  *
- * @author dev
+ * @author Theodoros Papadopoulos
  */
 enum LogLevel: int
 {

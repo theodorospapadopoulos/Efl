@@ -14,6 +14,11 @@ use Psr\Log\LogLevel;
  */
 class LogLevelTest extends TestCase
 {
+    public function testEightLogLevelsExist(): void
+    {
+        $this->assertEquals(8, count(LogLevel::cases()));
+    }
+
     public function testLogLevelInclusionRelativeToBaseLevel():void
     {
         $baselevel = LogLevel::ERROR;

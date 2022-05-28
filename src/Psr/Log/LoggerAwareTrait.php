@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
  *
  * @author Theodoros Papadopoulos
  */
-class LoggerAwareTrait
+trait LoggerAwareTrait
 {
     /**
      * A PSR-3 logger. Nulls are allowed, as this effectively disables logging

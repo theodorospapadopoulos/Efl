@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Psr\Log;
+namespace Tests\Unit\Psr\Log;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
@@ -10,7 +10,8 @@ use Psr\Log\LogLevel;
 /**
  * Test the LogLevel enum functions
  *
- * @author dev
+ * @author Theodoros Papadopoulos
+ * @group Logging
  */
 class LogLevelTest extends TestCase
 {
@@ -19,6 +20,10 @@ class LogLevelTest extends TestCase
         $this->assertEquals(8, count(LogLevel::cases()));
     }
 
+    /**
+     * @small
+     * @return void
+     */
     public function testLogLevelInclusionRelativeToBaseLevel():void
     {
         $baselevel = LogLevel::ERROR;

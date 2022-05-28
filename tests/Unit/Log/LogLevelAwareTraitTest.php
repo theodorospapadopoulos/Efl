@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Log;
+namespace Tests\Unit\Log;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
@@ -12,16 +12,25 @@ use Efl\Log\LogLevelAwareTrait;
  * Test the LogLevelAwareTrait
  *
  * @author Theodoros Papadopoulos
+ * @group Logging
  */
 class LogLevelAwareTraitTest extends TestCase
 {
     use LogLevelAwareTrait;
 
+    /**
+     * @small
+     * @return void
+     */
     public function testInitialization(): void
     {
         $this->assertSame(LogLevel::DEBUG, $this->logLevel);
     }
 
+    /**
+     * @small
+     * @return void
+     */
     public function testGetSetValidityAndLoggability(): void
     {
         $this->setLogLevel(LogLevel::NOTICE);

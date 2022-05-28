@@ -2,40 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tests\Core;
+namespace Tests\Unit\Core;
 
-use \PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
+use Tests\Helpers\AutoloaderExposer;
 
-require_once(dirname(dirname(dirname(__FILE__))) . '/src/Core/Autoloader.php');
-
-final class AutoloaderExposer extends \Efl\Core\Autoloader
-{
-    /**
-     * @var string[] $files
-     */
-    private array $files;
-    
-    public function __construct()
-    {
-        $this->files = [];
-    }
-    
-    public function setFiles(array $files): void
-    {
-        $this->files = $files;
-    }
-    
-    protected function fileExists(string $file): bool
-    {
-        return in_array($file, $this->files);
-    }
-    
-    public function getClassPath(string $class): ?string
-    {
-        return parent::getClassPath($class);
-    }
-}
-
+/**
+ * @author Theodoros Papadopoulos
+ * @group Core
+ */
 final class AutoloaderTest extends TestCase
 {
     private AutoloaderExposer $loader;
@@ -50,7 +25,11 @@ final class AutoloaderTest extends TestCase
             '/home/dev/efl/src/Services/Cache/Redis.php',
         ]);
     }
-    
+
+    /**
+     * @small
+     * @return void
+     */
     public function testSimpleRootNamespaceWithSubdirs(): void
     {
         $this->loader->mapNamespace('\\Efl\\', '/home/dev/efl/src');
@@ -64,7 +43,11 @@ final class AutoloaderTest extends TestCase
         $classpath = $this->loader->getClassPath('\\Efl\\Services\\Database\\MySql');
         $this->assertSame($classpath, '/home/dev/efl/src/Services/Database/MySql.php');
     }
-    
+
+    /**
+     * @small
+     * @return void
+     */
     public function testMultipleDirectoriesPerNamespace(): void
     {
         $this->loader->mapNamespaceMultiple('Efl', ['/home/dev/efl/src/', '/home/dev/efl/src/Core']);
@@ -75,7 +58,11 @@ final class AutoloaderTest extends TestCase
         $classpath = $this->loader->getClassPath('Efl\\Logger');
         $this->assertSame($classpath, '/home/dev/efl/src/Core/Logger.php');
     }
-    
+
+    /**
+     * @small
+     * @return void
+     */
     public function testDeepNamespaceAliases(): void
     {
         $this->loader->mapNamespace('Efl\\DB', '/home/dev/efl/src/Services/Database/')
@@ -91,7 +78,11 @@ final class AutoloaderTest extends TestCase
         $classpath = $this->loader->getClassPath('Efl\\Application');
         $this->assertSame($classpath, '/home/dev/efl/src/Application.php');
     }
-    
+
+    /**
+     * @small
+     * @return void
+     */
     public function testFailureToFindClasspath(): void
     {
         $this->loader->mapNamespace('\\Efl', '/home/dev/efl/src/Core/');

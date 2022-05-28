@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+namespace Tests\Core;
+
+use \PHPUnit\Framework\TestCase;
+
 require_once(dirname(dirname(dirname(__FILE__))) . '/src/Core/Autoloader.php');
 
 final class AutoloaderExposer extends \Efl\Core\Autoloader
@@ -32,7 +36,7 @@ final class AutoloaderExposer extends \Efl\Core\Autoloader
     }
 }
 
-final class AutoloaderTest extends PHPUnit\Framework\TestCase
+final class AutoloaderTest extends TestCase
 {
     private AutoloaderExposer $loader;
     

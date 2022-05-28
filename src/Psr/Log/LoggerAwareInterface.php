@@ -13,10 +13,10 @@ namespace Psr\Log;
 interface LoggerAwareInterface
 {
     /**
-     * Attach a logger
+     * Attach a logger. Null is allowed to effectively disable the logger
      *
-     * @param LoggerInterface $logger
+     * @param ?LoggerInterface $logger
      * @return void
      */
-    public function setLogger(LoggerInterface $logger): void;
+    public function setLogger(?LoggerInterface $logger): void;
 }
